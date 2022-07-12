@@ -1,0 +1,37 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: dp-gcs
+  namespace: teamdagpenger
+  labels:
+    team: teamdagpenger
+spec:
+  image: {{image}}
+  port: 80
+  liveness:
+    path: "/isalive"
+    initialDelay: 1
+  readiness:
+    path: "/isready"
+    initialDelay: 1
+  replicas:
+    min: 1
+    max: 1
+    cpuThresholdPercentage: 80
+  prometheus:
+    enabled: false
+  resources:
+    limits:
+      cpu: 400m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+  ingresses:
+    - https://dp-gcs.dev.nav.no
+  env:
+    - name: BUCKET_NAME
+      value: dp-gcs-test
+  gcp:
+    buckets:
+      - name: dp-gcs-test
