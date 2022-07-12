@@ -29,9 +29,6 @@ spec:
       memory: 128Mi
   ingresses:
     - https://dp-gcs.dev.nav.no
-  env:
-    - name: BUCKET_NAME
-      value: dp-gcs-test
   gcp:
     buckets:
       - name: dp-gcs-test
